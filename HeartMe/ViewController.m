@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "BloodTestConfig.h"
 
-@interface ViewController (){
+@interface ViewController () <UITextFieldDelegate>{
     
 }
 
@@ -35,7 +35,6 @@
 }
 
 - (void) fetchHeartDataFromJson {
-    NSLog(@"fetching data...");
     
     NSString *urlAddress = @"https://s3.amazonaws.com/s3.helloheart.home.assignment/bloodTestConfig.json";
     
@@ -55,8 +54,7 @@
         NSMutableArray *bloodtestsJSON = [jsonDictionery objectForKey:@"bloodTestConfig"];
         
         NSLog(@"%@", bloodtestsJSON);
-        
-        //        NSMutableArray * bloodTestArray = [[NSMutableArray alloc]init];
+    
         for(int i=0; i< bloodtestsJSON.count; i++){
             BloodTestConfig *bloodTest = BloodTestConfig.new;
             bloodTest.name = [[bloodtestsJSON objectAtIndex: i]objectForKey:@"name"];
@@ -67,7 +65,6 @@
         }
         
         NSLog(@"finished parsing the blood test array");
-        
         
     }]resume];
 }
@@ -82,24 +79,7 @@
     
 }
 
--(Boolean) checkInputFromUser:(NSString*)testName withResult:(NSString*)testResult {
-    
-    NSRange  searchedRange = NSMakeRange(0, [testName length]);
-    //    'A-Z', 'a-z', '0-9' and '(),-:/
-    //    @"(?:www\\.)?((?!-)[a-zA-Z0-9-]{2,63}(?<!-))\\.?((?:[a-zA-Z0-9]{2,})?(?:\\.[a-zA-Z0-9]{2,})?)"
-    NSString *pattern = @"(?:www\\.)?((?!-)[a-zA-Z0-9-]{2,63}(?<!-))\\.?((?:[a-zA-Z0-9]{2,})?(?:\\.[a-zA-Z0-9]{2,})?)";
-    NSError  *error = nil;
-    
-    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:&error];
-    NSArray* matches = [regex matchesInString:testName options:0 range: searchedRange];
-    for (NSTextCheckingResult* match in matches) {
-        NSString* matchText = [testName substringWithRange:[match range]];
-        NSLog(@"match: %@", matchText);
-        NSRange group1 = [match rangeAtIndex:1];
-        NSRange group2 = [match rangeAtIndex:2];
-        NSLog(@"group1: %@", [testName substringWithRange:group1]);
-        NSLog(@"group2: %@", [testName substringWithRange:group2]);
-    }
+-(void) checkInputFromUser:(NSString*)testName withResult:(NSString*)testResult {
     
     NSString *sadSmeiley = @"sad smiely 512.png";
     NSString *happySmeiley = @"happy smiely 512.png";
@@ -138,25 +118,55 @@
         self.outputLabelForUser.text = [NSString stringWithFormat:@"Unknown"];
         _smielyImageForUser.image = [UIImage imageNamed:confusedSmeiley];
     }
-    
-    
-    return true;
 }
-
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    /*  limit to only numeric characters  */
-    NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-    for (int i = 0; i < [string length]; i++) {
-        unichar c = [string characterAtIndex:i];
-        if ([myCharSet characterIsMember:c]) {
-            return YES;
+    
+    NSInteger newLength = [textField.text length] + [string length] - range.length;
+    NSInteger match = 1;
+    NSString *pattern1 = @"[A-Z0-9a-z(),-:/\n]";
+    NSString *pattern2 = @"[0-9.\n]";
+    NSError *error;
+    
+    if([string length]==0){
+        return YES;
+    }
+    
+    if (textField.tag == 1) {
+        
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern1 options:0 error:&error];
+        
+        if (![string canBeConvertedToEncoding:NSASCIIStringEncoding]){
+            match = 0;
+        } else if ([string length]>0) {
+            match = [regex numberOfMatchesInString:string options:0 range:NSMakeRange(0, 1)];
         }
+        
+        if (match != 1) {
+            return NO;
+        }
+        
+        return (newLength > 15) ? NO : YES;
+        
+    } else {
+        
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern2 options:0 error:&error];
+        
+        if (![string canBeConvertedToEncoding:NSASCIIStringEncoding]){
+            match = 0;
+        } else if ([string length]>0) {
+            match = [regex numberOfMatchesInString:string options:0 range:NSMakeRange(0, 1)];
+        }
+        
+        if (match != 1) {
+            return NO;
+        }
+ 
+        return (newLength > 5) ? NO : YES;
     }
     return NO;
 }
-
 
 @end
 

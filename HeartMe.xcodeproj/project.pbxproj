@@ -13,6 +13,7 @@
 		D785BF5721112AEC00BDA382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D785BF5621112AEC00BDA382 /* Assets.xcassets */; };
 		D785BF5A21112AED00BDA382 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D785BF5821112AEC00BDA382 /* LaunchScreen.storyboard */; };
 		D785BF5D21112AED00BDA382 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D785BF5C21112AED00BDA382 /* main.m */; };
+		D785BF6521119A9500BDA382 /* BloodTestConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D785BF6421119A9500BDA382 /* BloodTestConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		D785BF5921112AEC00BDA382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D785BF5B21112AED00BDA382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D785BF5C21112AED00BDA382 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D785BF6321119A9500BDA382 /* BloodTestConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BloodTestConfig.h; sourceTree = "<group>"; };
+		D785BF6421119A9500BDA382 /* BloodTestConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BloodTestConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				D785BF4E21112AEC00BDA382 /* AppDelegate.m */,
 				D785BF5021112AEC00BDA382 /* ViewController.h */,
 				D785BF5121112AEC00BDA382 /* ViewController.m */,
+				D785BF6321119A9500BDA382 /* BloodTestConfig.h */,
+				D785BF6421119A9500BDA382 /* BloodTestConfig.m */,
 				D785BF5321112AEC00BDA382 /* Main.storyboard */,
 				D785BF5621112AEC00BDA382 /* Assets.xcassets */,
 				D785BF5821112AEC00BDA382 /* LaunchScreen.storyboard */,
@@ -144,6 +149,7 @@
 			files = (
 				D785BF5221112AEC00BDA382 /* ViewController.m in Sources */,
 				D785BF5D21112AED00BDA382 /* main.m in Sources */,
+				D785BF6521119A9500BDA382 /* BloodTestConfig.m in Sources */,
 				D785BF4F21112AEC00BDA382 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

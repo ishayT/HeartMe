@@ -10,6 +10,13 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *pageHeader;
+@property (weak, nonatomic) IBOutlet UITextField *testNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *testResultTextField;
+@property (weak, nonatomic) IBOutlet UILabel *outputLabelForUser;
+@property (weak, nonatomic) IBOutlet UIImageView *smielyImageForUser;
+
+- (IBAction)submitResultsButtonPressed:(UIButton *)sender;
 
 @end
 
